@@ -1,0 +1,25 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	groovy 'org.codehaus.groovy:groovy:1.8.2'
+	compile 'org.codehaus.groovy.modules:groovyws:0.5.2'
+	compile 'mysql:mysql-connector-java:5.1.17'
+	compile 'joda-time:joda-time:2.0'
+}
+
+task copyToLib(type: Copy) {
+	from configurations.compile
+	into "$projectDir/libs"
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'kent.RMASServer'
+	}
+}
